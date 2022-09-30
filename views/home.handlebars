@@ -1,0 +1,164 @@
+﻿<div class="head-slide">
+    {{!-- <img class="w-100 slide" src="/images/page/slide-1.png"> --}}
+    <div class="logo">
+        <img src="/images/page/logo.png">
+    </div>
+</div>
+<div class="about-us">
+    <div class="text-container">
+        <div class="title">
+            <h1>ごあいさつ</h1>
+            <hr class="hr-line">
+            <h3 class="color-blue">About us</h3>
+        </div>
+        <div class="content">
+            {{data.about}}
+        </div>
+    </div>
+    <div class="side-item">
+        <img src="/images/page/image-1.png">
+    </div>
+</div>
+
+<div class="strong-point">
+    <div class="side-item">
+        <img class="background" src="/images/page/image-2.png">
+        <img class="inside-strong-point" src="/images/page/image-3.png">
+    </div>
+    <div class="text-container">
+        <div class="title">
+            <h1>私たちの強み</h1>
+            <hr class="hr-line">
+            <h3 class="color-blue">Our strong point</h3>
+        </div>
+        <div class="content">
+            直接輸入された原材料の利点、市場で競争するのに良い価格で、同社は技術、機械システムを継続的に改善し、トレーニングコースを持つ労働者のスキルを改善しています。 短期および長期の技術的専門知識、労働安全を創出し、産業衛生を確保します。 私たちは、品質、数量、納期に関するお客様のすべての要件を満たす製品を提供できると確信しています。
+            <button class="home-button" onclick="location.href='/about'">詳細を見る</button>
+        </div>
+    </div>
+</div>
+<div class="our-service">
+    <img class="w-100" src="/images/page/image-4.png">
+    <div class="text-container">
+        <div class="title">
+            <h1>私たちのサービス</h1>
+            <hr class="line">
+            <h3>OUR SERVICES</h3>
+        </div>
+        <div class="content">
+            <b>包装資材、工業用印刷製品、ロール、ナイロンフィルム、<br />産業供給用ナイロンバッグの製造。</b>
+        </div>
+    </div>
+</div>
+<div class="product">
+    <div class="container">
+        <div class="text-container">
+            <div class="title">
+                <h1>私たちの取扱商品</h1>
+                <hr class="line">
+                <h3 class="color-blue">OUR PRODUCTS</h3>
+            </div>
+            <div class="content">
+                私たちは常に長期的な事業戦略とともにお客様の声に耳を傾けることをモットーに、Thai Hung Investment＆Production Co.、Ltd.はお客様の成功は私たち自身の成功であると認識しています。
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="product-container">
+            <div class="product-item">
+                <img src="/images/product/plastic-bag.png">
+                <div class="product-name">ビニール袋</div>
+            </div>
+            <div class="product-item">
+                <img src="/images/product/PE-film.png">
+                <div class="product-name">PEフィルム</div>
+            </div>
+            <div class="product-item">
+                <img src="/images/product/PVC-film.png">
+                <div class="product-name">PVCフィルム</div>
+            </div>
+            <div class="product-item">
+                <img src="/images/product/zipper-bag.png">
+                <div class="product-name">ジッパーバッグ</div>
+            </div>
+            <div class="product-item">
+                <img src="/images/product/plastic-tie-straps.png">
+                <div class="product-name">プラスチック製タイストラップ</div>
+            </div>
+            <div class="product-item">
+                <img src="/images/product/PVC-film-2.png">
+                <div class="product-name">PVCフィルム</div>
+            </div>
+        </div>
+        <div class="product-button">
+            <button class="home-button" onclick="location.href='/product/1/1'">詳細を見る</button>
+        </div>
+    </div>
+</div>
+<div class="factory">
+    <div class="container">
+        <div class="text-container">
+            <div class="title">
+                <h1>工場・会社</h1>
+                <hr class="line">
+                <h3 class="color-blue">OUR FACTORIES</h3>
+            </div>
+            <div class="content">
+                ThaiHungProは、品質、サービス、高度な技術が常にあらゆる分野で事業を行う企業の存続と発展において最も重要な要素であることを理解しており、これも「戦い」と見なされています。 そこでは常にお客様が主な決定です-私たちの成功を決定します。
+            </div>
+        </div>
+    </div>
+    <div class="full-width-gallery">
+
+        {{#each data.media}}
+        <div class="gallery-div">
+            <a onclick="openPretty({{@index}}, '/{{this.source}}')" id="galleryImg-{{@index}}"><img class="w-100" src="/{{this.source}}"></a>
+        </div>
+        {{/each}}
+
+    </div>
+    <div class="product-button">
+        <button class="home-button" onclick="location.href='/facility'">詳細を見る</button>
+    </div>
+    <div class="full-width-gallery-cover-image">
+        <img class="w-100" src="/images/page/image-6.png">
+    </div>
+</div>
+<div class="news">
+    <div class="container">
+        <div class="text-container">
+            <div class="title">
+                <h1>ニュース</h1>
+                <hr class="line">
+                <h3 class="color-blue">NEWS</h3>
+            </div>
+            <div class="content">
+                重要なイベントに関するニュース。 業界の最新ニュース、最新ニュースグループの更新を専門とする企業ポリシー。
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="grid-2">
+
+            {{homeNews data.news}}
+
+        </div>
+    </div>
+    <div class="product-button">
+        <button class="home-button" onclick="location.href='/news'">詳細を見る</button>
+    </div>
+
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+ 
+</div>
+<div id="myModal" class="modal">
+
+    <!-- The Close Button -->
+    <span class="modalClose">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="pretty">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+</div>

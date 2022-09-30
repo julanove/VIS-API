@@ -1,0 +1,145 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>List Product</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <!--<li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">jsGrid</li>-->
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Product</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body" >
+            <div style="display: flex;">
+                <div style="margin-top: 5px; padding-right: 10px;">
+                    Category:
+                </div>
+                <div class="form-group">
+                    <select class="form-control" style="width:300px;" id="type">
+                        {{#each data.type}}
+                        <option value="{{productTypeID}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div id="jsGrid1"></div>
+        </div>
+        <div class="card-footer">
+            <button type="button" onclick="location.href='/admin/productadd'" class="btn btn-primary insert">Add Product</button>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+<script defer src="/js/db.js"></script>
+<script defer src="/plugins/jsgrid/jsgrid.min.js"></script>
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+
+<script>
+
+    var dbx = null;
+	console.log('RUN PRODUCT PAGE 3');
+
+	window.onload = function () {
+		console.log('RUN PRODUCT PAGE 2');
+	}
+
+    $(document).ready(function () {
+        console.log('RUN PRODUCT PAGE');
+        var selectedType = $('#type option:selected').val();
+        console.log(selectedType);
+        loadDBX(selectedType);
+    });
+
+    $('select').on('change', function () {
+        var selectedType = $('#type option:selected').val();
+        console.log(selectedType);
+        $.ajax({
+            url: "/productSelect",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ type: selectedType }),
+            success: function (msg) {
+                console.log(msg);
+                dbx = msg.product;
+                loadGrid();
+            }
+        });
+
+    });
+
+    function loadDBX(selectedType) {
+        $.ajax({
+            url: "/productSelect",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ type: selectedType }),
+            success: function (msg) {
+                dbx = msg.product;
+                loadGrid();
+            }
+        });
+    }
+
+    function loadGrid() {
+        $("#jsGrid1").jsGrid({
+            height: "637px",
+            width: "100%",
+            sorting: true,
+            paging: true,
+            editing: false,
+            data: dbx,
+			pageSize: 10,
+			pageIndex: 1,
+
+            deleteConfirm: "Do you really want to delete this record?",
+
+            fields: [
+                { name: "productID", type: "text", width: 50, title: "ID" },
+                { name: "name", type: "text", width: 180, title: "Name" },
+                { name: "description", type: "text", width: 300, title: "記述" },
+                { type: "control", editButton: false, title: "Delete" }
+            ],
+            rowClick: function (idx) {
+                var url = "/admin/productdetails/" + idx.item.productID;
+                console.log(url);
+                window.location = "/admin/productdetails/" + idx.item.productID;
+
+            },
+            onItemDeleting: function (args) {
+
+                console.log(args.item.productID);
+                $.ajax({
+                    url: "/productDelete",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({ productID: args.item.productID }),
+                    success: function (msg) {
+
+                    }
+                })
+            },
+            onItemDeleted: function (args) {
+                alert('Deleted');
+            }
+        });
+    }
+
+</script>

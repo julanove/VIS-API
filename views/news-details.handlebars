@@ -1,0 +1,88 @@
+﻿<div class="main news-detail">
+    <div class="banner">
+        <div class="banner-img">
+            <img class="w-100" src="/images/page/slide-1.png">
+            <div class="page-title"><span>ニュース</span></div>
+        </div>
+    </div>
+    <div class="about">
+        <div class="news container">
+            <div class="container product__tab__container text-center" style="visibility: visible; animation-name: fadeInUp;">
+                <ul class="nav nav-tabs border-0 d-inline-block" role="tablist">
+                    <li class="nav-item d-inline-block border-0 active">
+                        <a class="nav-link" href="/news">ニュース</a>
+                    </li>
+                    <li class="nav-item d-inline-block border-0">
+                        <a class="nav-link">{{data.news.title}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content container p-0">
+                <div class="tab-pane fade container active in" id="news0" role="tabpanel">
+                    <h3 class="news__title">{{data.news.title}}</h3>
+                    <div class="news__date">{{formatDate data.news.date}}</div>
+                    <div class="content">
+                        <img class="news-cover w-100" src="/{{data.news.image}}">
+
+
+                        <h4 class="news__excerpt"> {{ data.news.description }} </h4>
+                        <div class="news__descibe">
+                            {{safeString data.news.content}}
+                            <!--<p>3月24日の夕方、ホーチミン市の情報通信省の副局長であるトゥルオン氏は、Zing.vnと話し合い、近い将来、ホーチミン市は外国語大学のホックモン地区にある施設を使用する予定であると述べました-第2政治学院（ホーチミン国立政治学院）の9区にあるホーチミン市コンピュータおよび寮。</p>
+    <p>「緊急事態では、これら2つの部署が検疫に利用できる施設を市内に積極的に貸与することを提案しました。3月26日、これら2つの場所は検疫された人々の受け入れを開始します。リージョン2政治アカデミー（ホーチミン国立政治アカデミー）の寮は、1,000議席を提供すると予想されています。</p>
+    <p>一方、3月24日の午後には、ホーチミン市国立大学の寮と国防教育安全保障センターが5,000人の孤立した人々を受け入れました。近い将来、この場所はこれ以上受け取ることができません。</p>
+    <div class="news-content-img">
+        <img class="w-100" src="/images/news/news-6.jpg">
+        <div class="img-name">24/3の午後、当局はHUFLITの寮に行き、孤立した人々を迎えるための設備を準備しました。</div>
+    </div>
+    <p>3月24日午後のホーチミン市Covid-19疾患予防運営委員会の会議で、保健省の局長であるグエンタンビン氏はまた、地域の大学に生徒と学生の移動を依頼しました。 感染の可能性を制限するために、この期間中もホステルに滞在します。</p>
+    <p>同氏は、ホーチミン市国立大学の寮に加えて、同市は近い将来、隔離地域として他の多くの大学の寮も要求し続けると語った。</p>
+    <p>以前、3月20日、教育訓練省は、大学、大学、研究所、および教育カレッジのリーダーに、まだ集中的に入学するために組織されていない場合でも、調整するよう書面で要請しました。 地域でのCovid-19流行の防止のための運営委員会は、寮を集中隔離施設として使用しました。</p>-->
+                        </div>
+
+
+                    </div>
+
+                    <!--<div class="news-detail__related">
+                        <h3 class="text-center">関連ニュース</h3>
+                        <hr>
+                        <div class="news-detail__related__container">
+                            <div class="product-item">
+                                <img src="/images/product/plastic-bag.png">
+                                <div class="product-name">ビニール袋</div>
+                                <div class="date">30/06/2019</div>
+                            </div>
+                            <div class="product-item">
+                                <img src="/images/product/PE-film.png">
+                                <div class="product-name">PEフィルム</div>
+                                <div class="date">30/06/2019</div>
+                            </div>
+                            <div class="product-item">
+                                <img src="/images/product/PVC-film.png">
+                                <div class="product-name">PVCフィルム</div>
+                                <div class="date">30/06/2019</div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+                <div class="tab-pane fade container in" id="news1" role="tabpanel">
+                    news 2
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".menux").removeClass("menu-active");
+		$(".menu-news").addClass("menu-active");
+	});
+
+</script>

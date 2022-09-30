@@ -1,0 +1,167 @@
+﻿<div class="main about-page">
+    <div class="banner">
+        <div class="banner-img">
+            <img class="w-100" src="/images/page/slide-1.png">
+            <div class="page-title"><span>会社概要</span></div>
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="title text-center container">
+            <h1>ごあいさつ</h1>
+            <hr class="hr-line">
+            <h3 class="color-blue">About us</h3>
+        </div>
+        <div class="content container w-100">
+            <div class="container">
+                {{data.about.about}}
+            </div>
+            <div class="container">
+                <img src="/{{data.about.image}}">
+            </div>
+        </div>
+    </div>
+
+    <div class="container information-table">
+        <table class="company-info">
+            <tr>
+                <th>社名</th>
+                <td>
+                    {{brSpace data.about.shamei}}
+                </td>
+            </tr>
+            <tr>
+                <th>本社住所</th>
+                <td>
+                    {{brSpace data.about.honsha_location}}
+                </td>
+            </tr>
+            <tr>
+                <th>工場</th>
+                <td>
+                    {{brSpace data.about.koujou}}
+                </td>
+            </tr>
+            <tr>
+                <th>連絡先</th>
+                <td>
+                    {{brSpace data.about.renrakusaki}}
+                </td>
+            </tr>
+            <tr>
+                <th>代表者</th>
+                <td>{{brSpace data.about.daihyou}}</td>
+            </tr>
+            <tr>
+                <th>資本金</th>
+                <td>{{brSpace data.about.shihon}}</td>
+            </tr>
+            <tr>
+                <th>従業員数</th>
+                <td>{{brSpace data.about.insu}}</td>
+            </tr>
+            <tr>
+                <th>業務内容</th>
+                <td>{{brSpace data.about.gyoumu}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="human">
+        {{#if data.about.middleBannerD }}
+        <div class="human-banner-img container">
+            <img class="w-100" src="{{brSpace data.about.middleBanner}}">
+        </div>
+        {{/if}}
+        <div class="w-100 mn-bg">
+            <div class="container">
+                <div class="manager">
+                    <div class="manager-img">
+                        <img src="/{{brSpace data.about.imageRep1}}">
+                    </div>
+                    <div class="manager-intro">
+                        <div>
+                            <h2>{{brSpace data.about.repName1}}</h2>
+                            <h4>{{brSpace data.about.repPos1}}</h4>
+                            <p class="text-justify">{{brSpace data.about.repDes1}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="marketing">
+                <div class="marketer">
+                    <img src="/{{brSpace data.about.imageRep3}}">
+                    <div class="content">
+                        <h2>{{brSpace data.about.repName3}}</h2>
+                        <h4>{{brSpace data.about.repPos3}}</h4>
+                        <p>{{brSpace data.about.repDes3}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 our-service">
+        <img class="service-banner" src="/images/page/image-4.png">
+        <img class="round-image" src="{{brSpace data.about.roundBanner}}">
+        <div class="text-container">
+            <div class="title">
+                <h1>私たちのサービス</h1>
+                <hr class="line">
+                <h3>OUR SERVICES</h3>
+            </div>
+            <div class="content">
+                <b>包装資材、工業用印刷製品、ロール、ナイロンフィルム、<br />産業供給用ナイロンバッグの製造。</b>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="demo-vid">
+            <div class="video">
+                <iframe src="{{brSpace data.about.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="product-img">
+                <img src="/images/news/news-1.png">
+                <img src="/images/news/news-2.png">
+                <img src="/images/news/news-3.png">
+                <img src="/images/news/news-4.png">
+            </div>
+        </div>
+    </div>
+    <div class="w-100 factory">
+        <div class="container">
+            <div class="text-container">
+                <div class="title">
+                    <h1>私たちの強み</h1>
+                    <hr class="line">
+                    <h3 class="color-blue">Our strong point</h3>
+                </div>
+                <div class="content">
+                    {{brSpace data.about.strongpoint}}
+                    <div class="w-100 factory-strong-img">
+                        <div class="">
+                            <img class="w-100" src="{{brSpace data.about.footerImage1}}">
+                        </div>
+                        <div class="">
+                            <img class="w-100" src="{{brSpace data.about.footerImage2}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".menux").removeClass("menu-active");
+		$(".menu-about").addClass("menu-active");
+	});
+
+</script>

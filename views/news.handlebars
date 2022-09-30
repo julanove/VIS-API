@@ -1,0 +1,54 @@
+﻿<div class="main news-page">
+    <div class="banner">
+        <div class="banner-img">
+            <img class="w-100" src="/images/page/slide-1.png">
+            <div class="page-title"><span>ニュース</span></div>
+        </div>
+    </div>
+    <div class="about">
+        <div class="title text-center container">
+            <h1>ニュース</h1>
+            <hr class="hr-line">
+            <h3 class="color-blue">News</h3>
+        </div>
+        <div class="content">
+            <div class="container text-center">
+                重要なイベントに関するニュース。 業界の最新ニュース、最新ニュースグループの更新を専門とする企業ポリシー。
+            </div>
+        </div>
+        <div class="news container">
+
+            {{newsShow data.news}}
+
+            <!--<div class="paginator-container">
+                <div class="paginator">
+                    <a class="skip" href="#"> &lt;&lt; </a>
+                    <a class="skip" href="#"> &lt; </a>
+                    <a class="active" href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a class="skip" href="#"> &gt; </a>
+                    <a class="skip" href="#"> &gt;&gt; </a>
+                </div>
+            </div>-->
+            {{paging data.current data.count data.offset data.type 0}}
+
+        </div>
+    </div>
+
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".menux").removeClass("menu-active");
+		$(".menu-news").addClass("menu-active");
+	});
+
+</script>

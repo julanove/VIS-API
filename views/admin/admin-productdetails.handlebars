@@ -1,0 +1,250 @@
+﻿<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Product Information</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Text Editors</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-info">
+
+                <!--<form action="newsInsert" method="post" enctype="multipart/form-data">-->
+                <div class="card-header">
+                    {{data.product.name}}
+                </div>
+                        <!-- tools box -->
+                <div class="card-body">
+                    <input type="hidden" id="productID" name="productID" value="{{data.product.productID}}">
+
+                    <div class="form-group">
+                        <label>Main Image</label>
+                        <div>
+                            <input type="file" id="imageFile" name="profile_pic">
+                            <input type="hidden" value="{{data.product.image}}" id="imageFileURL" />
+                        </div>
+                        <img src="/{{data.product.image}}" id="imageFileReview" style="width:277px;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+
+                        <select class="form-control" style="width:300px;" id="type">
+                            {{#each data.type}}
+                            <option value="{{productTypeID}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb1" name="profile_pic">
+                                <input type="hidden" value="{{data.product.thumb1}}" id="tb1URL" />
+                            </div>
+                            <img src="/{{data.product.thumb1}}" id="tb1Review" style="width:277px;" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb2" name="profile_pic">
+                                <input type="hidden" value="{{data.product.thumb2}}" id="tb2URL" />
+                            </div>
+                            <img src="/{{data.product.thumb2}}" id="tb2Review" style="width:277px;" />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Thumbnails</label>
+                            <div>
+                                <input type="file" id="tb3" name="profile_pic">
+                                <input type="hidden" value="{{data.product.thumb3}}" id="tb3URL" />
+                            </div>
+                            <img src="/{{data.product.thumb3}}" id="tb3Review" style="width:277px;" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="name" name="name" value="{{data.product.name}}" class="form-control" placeholder="Enter ...">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="description" class="form-control" name="description" rows="3" placeholder="Enter ...">{{data.product.description}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Content</label>
+                        <textarea id="content" class="textarea" name="content" placeholder="Place some text here"
+                                  style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                        </textarea>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button id="updateNews" class="btn btn-primary">Submit</button>
+                </div>
+
+                <div class="card-body pad">
+                    <div class="mb-3">
+
+                    </div>
+                    <p class="text-sm mb-0">
+                        Editor <a href="https://github.com/summernote/summernote">
+                            Documentation and license information.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- ./row -->
+    <input type="hidden" value="{{websiteURL}}" id="websiteURL" />
+</section>
+
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!--<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>-->
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid.min.css">
+<link rel="stylesheet" href="/plugins/jsgrid/jsgrid-theme.min.css">
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+
+<script>
+
+    $('#updateNews').on('click', function () {
+
+        var name = $('#name').val();
+        var image = $('#imageFileURL').val().startsWith('images/') ? $('#imageFileURL').val() : ('images/' + $('#imageFileURL').val());
+        var content = $('#content').val();
+        var description = $('#description').val();
+        var productID = $('#productID').val();
+        var type = $('#type option:selected').val();
+
+        var tb1 = $('#tb1URL').val().startsWith('images/') ? $('#tb1URL').val() : ('images/' + $('#tb1URL').val());
+        var tb2 = $('#tb2URL').val().startsWith('images/') ? $('#tb2URL').val() : ('images/' + $('#tb2URL').val());
+        var tb3 = $('#tb3URL').val().startsWith('images/') ? $('#tb3URL').val() : ('images/' + $('#tb3URL').val());
+
+        $.ajax({
+            url: "/productUpdate",
+            type: "POST",
+            data: JSON.stringify({
+                name: name,
+                type: type,
+                image: image,
+                content: content,
+                description: description,
+                productID: productID,
+                tb1: tb1,
+                tb2: tb2,
+                tb3: tb3
+            }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (msg) {
+                console.log(msg);
+                location.href = '/admin/product';
+            },
+            error: function (request) {
+                alert('Error: ' + request.responseJSON.status.sqlMessage);
+                console.log(request);
+            }
+        });
+
+    })
+
+    $(document).ready(function () {
+
+        $('#content').summernote({
+            height: 400,
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
+            }
+        });
+
+        function sendFile(file, editor, welEditable) {
+            data = new FormData();
+            data.append("profile_pic", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "/imageInsert",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (url) {
+                    console.log(url);
+                    var result = JSON.parse(url);
+                    if (result.status == "OK") {
+                        $('#content').summernote('insertImage', '/images/' + result.filename)
+                    }
+                }
+            });
+        }
+
+        $('#content').summernote('pasteHTML', '{{safeString data.product.content}}');
+        //$('#content').summernote('pasteHTML', null);
+
+        $('#imageFile,#tb1,#tb2,#tb3').on('change', function (e) {
+
+            var elementID = this.getAttribute("id");
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#' + elementID + 'Review').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]); // convert to base64 string
+            }
+
+            //console.log($('#imageFile').val());
+            // -----------------------
+
+            var data = new FormData();
+            data.append('profile_pic', $('#' + elementID)[0].files[0]); 
+
+            $.ajax({
+                url: "/imageInsert",
+                type: "POST",
+                method: "POST",
+                data: data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (msg) {
+                    console.log(msg);
+
+                    var result = jQuery.parseJSON(msg);
+
+                    if (result.status == "OK") {
+                        console.log(result.filename);
+                        $('#' + elementID + 'URL').val(result.filename);
+                    }
+                    else {
+                        //document.getElementById("imagePreview").src = '';
+                    }
+                }
+            });
+
+        })
+
+        
+    });
+</script>
