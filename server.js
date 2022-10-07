@@ -5,14 +5,11 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql2');
 var app = express();
 
-var env = process.env.NODE_ENV || 'local';
-var config = require('./config/config')[env];
-
 const con = mysql.createConnection({
-    host     : 'localhost', //RDSのエンドポイント
-    user     : 'root', //MySQLのユーザ名
-    password : 'admin01', //MySQLのパスワード
-    database : 'nsy' //データベース名
+    host : process.env.DB_HOST,
+    user : process.env.DB_USERNAME, 
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_NAME
   });
 
 app.set('port', process.env.PORT || 3001);
@@ -41,7 +38,6 @@ app.post('/testPostGetInfo', (req, res) => {
             console.log('Ket qua la: ' + result[0]["ID"] + '-'+result[0]["Pass"]);
             res.send(JSON.stringify(result[0]["ID"] + '-' + result[0]["Pass"]));
         }
-        
     });
 });
 
