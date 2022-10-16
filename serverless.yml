@@ -1,0 +1,60 @@
+service: vis-api-v5
+
+plugins:
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 1 # Number of prev functions to keep before *prune*
+
+  environment:
+    development: ${file(./env/development.yml)}
+    production: ${file(./env/production.yml)}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+  timeout: 300
+  # memorySize: 512
+
+  # you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: 
+          - "s3:*"
+      Resource: 
+          - "*"
+    - Effect: "Allow"
+      Action:
+          - "secretsmanager:GetSecretValue"
+      Resource:
+          - "*"
+
+  vpc:
+    securityGroupIds: 
+      - ${file(./env/${opt:stage, self:custom.defaultStage}.yml):SECURITY_GROUP_ID}
+
+    subnetIds: 
+      - ${file(./env/${opt:stage, self:custom.defaultStage}.yml):SUBNETID_1}
+      - ${file(./env/${opt:stage, self:custom.defaultStage}.yml):SUBNETID_2}
+
+  environment:
+    DB_HOST: ${file(./env/${opt:stage, self:custom.defaultStage}.yml):DB_HOST}
+    DB_PORT: ${file(./env/${opt:stage, self:custom.defaultStage}.yml):DB_PORT}
+    DB_USERNAME: ${file(./env/${opt:stage, self:custom.defaultStage}.yml):DB_USERNAME}
+    DB_PASSWORD: ${file(./env/${opt:stage, self:custom.defaultStage}.yml):DB_PASSWORD}
+    DB_NAME: ${file(./env/${opt:stage, self:custom.defaultStage}.yml):DB_NAME}
+
+functions:
+  webApp:
+    handler: lambda.handler 
+    timeout: 29
+    events: 
+      - http: 
+          path: /
+          method: ANY
+      - http: 
+          path: /{proxy+}
+          method: ANY

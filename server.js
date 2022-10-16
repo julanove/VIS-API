@@ -12,6 +12,10 @@ const con = mysql.createConnection({
     database : process.env.DB_NAME
   });
 
+// confi
+
+//
+
 app.set('port', process.env.PORT || 3001);
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -28,6 +32,13 @@ app.post('/testPostSum', (req, res) => {
 app.post('/testPostGetInfo', (req, res) => {
     var params = req.body;
     let sql = "select * from test where ID = '"+params.ID+"'";
+
+    console.log('CONNECTION INFO -----');
+    console.log(process.env.DB_NAME);
+    console.log(process.env.DB_USERNAME);
+    console.log(process.env.DB_PASSWORD);
+    console.log(process.env.DB_HOST);
+
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
@@ -39,8 +50,11 @@ app.post('/testPostGetInfo', (req, res) => {
             res.send(JSON.stringify(result[0]["ID"] + '-' + result[0]["Pass"]));
         }
     });
-});
+}); 
 
 app.listen(app.get('port'), function () {
     console.log('Express started on ' + app.get('port'));
-})
+});
+
+module.exports = app;
+

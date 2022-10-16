@@ -1,1 +1,11 @@
+doc-tmp
+lambda-tmp
 node_modules
+compiled
+.cache
+browser/dist
+.history/src/
+.build/
+.git/
+.serverless/
+.env/

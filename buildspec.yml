@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - npm install 
+      - npm install serverless -g 
+  build:
+    commands: 
+      - sls deploy --stage ${DEPLOY_ENV} --force
+artifacts:
+  files:  
+    - '**/*'
