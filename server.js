@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql2');
 var app = express();
 
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USERNAME);
+console.log(process.env.DB_PASSWORD);
+console.log(process.env.DB_NAME);
+
 const con = mysql.createConnection({
     host : process.env.DB_HOST,
     user : process.env.DB_USERNAME, 

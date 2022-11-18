@@ -1,4 +1,4 @@
-service: vis-api-v5
+service: vis-api-v6
 
 plugins:
   - serverless-prune-plugin
